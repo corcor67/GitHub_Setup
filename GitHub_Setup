@@ -1,0 +1,70 @@
+#!/bin/bash
+
+file=~/.ssh
+if [ -d $file ]; then
+	echo "You have pre-existing SSH keys in ~/.ssh"
+sleep 1
+        echo "Backing up existing keys in ~/.ssh/key_backup"
+          cd ~/.ssh 
+           mkdir -p key_backup
+            cp id_rsa* key_backup
+        echo "Backup created"
+sleep 1
+        echo "Removing original key"
+          rm id_rsa*
+else 
+	echo "Good news, we didn't find existing SSH keys"
+sleep 1
+fi 
+clear
+        echo "Generating new SSH key for GitHub"
+        echo "We need your email to continue"
+        echo "Type your full email and press enter"
+        echo ""
+          read email
+        echo "Thanks, we're using $email to create you're GitHub keys."
+          ssh-keygen -t rsa -C "$email"
+sleep 1
+clear
+        echo "Now we need to add that key to our GitHub account"
+        echo 'Copy the lines between "START" and "END"'
+sleep 1
+        echo ""
+        echo "START" 
+        echo ""
+          cat id_rsa.pub
+        echo ""
+        echo "END"
+        echo "Press enter when you're ready to move on"
+          read this
+clear
+        echo "Now go to github.com and navigate to add a public key"
+        echo "Account Settings > SSH Public Keys > Add another public key"
+        echo "Paste the lines you copied and save it."
+        echo ""
+        echo "Press enter when you're ready to move on"
+          read this
+        echo "Time to test out the key"
+        echo "When asked if you're sure you want to connect type yes"
+          ssh-add ~/.ssh/id_rsa
+          ssh -T git@github.com
+
+        echo "Lets finish setting up your information"
+        echo ""
+        echo "Whats your name?"
+          read name
+git config --global user.name $name
+git config --global user.email $email
+        echo "Whats your GitHub username?"
+          read username
+git config --global github.user $username
+        echo "Add your API Token from GitHub"
+        echo "To find go to GitHub then... Account Settings > Account Admin"
+          read token
+git config --global github.token $token
+clear
+echo "All done..."
+echo "Thanks for using GitHub_Setup!"
+echo "Press enter to exit"
+
+read this
