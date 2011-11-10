@@ -36,7 +36,7 @@ sleep 2
         echo ""
         echo "START" 
         echo ""
-          cat ~/id_rsa.pub
+          cat ~/.ssh/id_rsa.pub
         echo ""
         echo "END"
         echo "Press enter when you're ready to move on"
