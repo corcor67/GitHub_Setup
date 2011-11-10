@@ -9,12 +9,12 @@ sleep 1
            mkdir -p key_backup
             cp id_rsa* key_backup
         echo "Backup created"
-sleep 1
+sleep 2
         echo "Removing original key"
           rm id_rsa*
 else 
 	echo "Good news, we didn't find existing SSH keys"
-sleep 1
+sleep 2
 fi 
 clear
         echo "Generating new SSH key for GitHub"
@@ -24,11 +24,11 @@ clear
           read email
         echo "Thanks, we're using $email to create you're GitHub keys."
           ssh-keygen -t rsa -C "$email"
-sleep 1
+sleep 2
 clear
         echo "Now we need to add that key to our GitHub account"
         echo 'Copy the lines between "START" and "END"'
-sleep 1
+sleep 2
         echo ""
         echo "START" 
         echo ""
