@@ -1,5 +1,8 @@
 #!/bin/bash
-
+# Install git
+	echo "Insatlling Git"
+	echo "requires your password"
+	  sudo apt-get install git
 file=~/.ssh
 if [ -d $file ]; then
 	echo "You have pre-existing SSH keys in ~/.ssh"
